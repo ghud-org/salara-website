@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Salara Consulting</title>
+<meta name="description" content="Salara Consulting plans and manages calm, intentional social media for mission-driven organizations: audits, strategy, content, and campaigns.">
+<link rel="icon" href="/assets/brand/salara-favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/brand/salara-app-icon-512.png">
+<meta name="theme-color" content="#1B4034">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Salara Consulting">
+<meta property="og:description" content="Salara Consulting plans and manages calm, intentional social media for mission-driven organizations: audits, strategy, content, and campaigns.">
+<meta property="og:image" content="/assets/brand/salara-profile-1000.png">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --green:#1B4034;
+  --green-deep:#122C24;
+  --cream:#F2EADF;
+  --cream-2:#E9DECF;
+  --paper:#FAF6F0;
+  --ochre:#C08040;
+  --ochre-deep:#9E6630;
+  --sage:#4A6B5C;
+  --sage-light:#A9BFB2;
+  --rule:rgba(27,64,52,.18);
+  /* Wordmark is a humanist serif (Pagella/Palatino); subline is a wide-tracked geometric sans. */
+  --serif:"TeX Gyre Pagella","Palatino Linotype",Palatino,"Book Antiqua","URW Palladio L",P052,Georgia,serif;
+  --sans:"Poppins","Helvetica Neue",Arial,sans-serif;
+  --pad:clamp(20px,5vw,64px);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--paper);color:var(--green);
+  font-family:var(--serif);font-size:clamp(17px,1.05vw,19px);line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:var(--green);text-decoration-color:var(--ochre);text-underline-offset:3px}
+:focus-visible{outline:2px solid var(--ochre);outline-offset:2px}
+.wrap{max-width:1080px;margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
+.eyebrow{
+  font-family:var(--sans);font-size:12px;font-weight:500;letter-spacing:.24em;text-transform:lowercase;
+  color:var(--sage);margin:0 0 14px;
+}
+h2{font-weight:400;letter-spacing:-.01em;line-height:1.15;font-size:clamp(28px,3.6vw,42px);margin:0 0 12px}
+.lede{max-width:56ch;color:rgba(27,64,52,.8);margin:0 0 32px}
+
+/* ---------- header ---------- */
+.masthead{background:var(--green);color:var(--cream);position:sticky;top:0;z-index:50}
+.masthead a{color:inherit;text-decoration:none}
+.masthead .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:14px;padding-bottom:14px}
+.mark{display:flex;align-items:center;gap:12px}
+.mark svg{display:block;width:36px;height:36px}
+.mark .word{display:grid;line-height:1}
+.mark .word b{font-weight:400;font-size:25px;letter-spacing:.02em}
+.mark .word small{font-family:var(--sans);font-size:8.5px;letter-spacing:.42em;color:var(--sage-light);margin-top:4px}
+.nav{display:flex;gap:24px;font-family:var(--sans);font-size:12.5px;letter-spacing:.14em;text-transform:lowercase}
+.nav a{opacity:.78;padding:4px 0;border-bottom:1px solid transparent}
+.nav a:hover,.nav a:focus-visible{opacity:1;border-bottom-color:var(--ochre)}
+@media(max-width:620px){.nav a:not(.nav-cta){display:none}}
+
+/* ---------- hero ---------- */
+.hero{background:var(--green);color:var(--cream);padding:clamp(40px,6vw,72px) 0 clamp(64px,9vw,112px);overflow:hidden;position:relative}
+.hero .wrap{position:relative}
+.hero h1{
+  font-weight:400;letter-spacing:-.02em;line-height:1.05;
+  font-size:clamp(42px,7.4vw,84px);margin:0 0 24px;max-width:14ch;
+}
+.hero h1 em{color:var(--ochre)}
+.hero p{max-width:46ch;font-size:clamp(18px,1.6vw,21px);color:rgba(242,234,223,.8);margin:0 0 34px}
+.hero .eyebrow{color:var(--sage-light)}
+.hero .seal{
+  position:absolute;right:calc(var(--pad) - 120px);top:-20px;width:clamp(260px,34vw,440px);height:auto;
+  opacity:.09;pointer-events:none;
+}
+@media(max-width:720px){.hero .seal{display:none}}
+.btn{
+  display:inline-block;font-family:var(--sans);font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:lowercase;
+  background:var(--ochre);color:var(--green-deep);text-decoration:none;border-radius:2px;
+  padding:15px 28px;border:0;cursor:pointer;transition:transform .15s ease,background .15s ease;
+}
+.btn:hover,.btn:focus-visible{background:#D18F4C;transform:translateY(-2px)}
+.reveal{opacity:0;transform:translateY(14px);animation:rise .7s cubic-bezier(.2,.7,.3,1) forwards}
+.reveal:nth-child(2){animation-delay:.08s}
+.reveal:nth-child(3){animation-delay:.16s}
+.reveal:nth-child(4){animation-delay:.24s}
+@keyframes rise{to{opacity:1;transform:none}}
+
+/* ---------- services ---------- */
+.services{padding:clamp(56px,8vw,96px) 0 clamp(40px,6vw,72px)}
+.rows{border-top:1px solid var(--rule);margin:0;padding:0;list-style:none}
+.row{
+  display:grid;grid-template-columns:44px 1fr;gap:0 20px;align-items:baseline;
+  border-bottom:1px solid var(--rule);padding:26px 16px;
+  transition:background .18s ease,padding-left .18s ease;
+}
+.row:hover{background:var(--cream);padding-left:24px}
+.row .idx{font-family:var(--sans);font-size:12px;color:var(--ochre-deep);letter-spacing:.08em}
+.row h3{font-weight:400;font-size:clamp(22px,2.4vw,28px);letter-spacing:-.01em;line-height:1.2;margin:0}
+.row .tag{font-family:var(--sans);font-size:10.5px;letter-spacing:.16em;color:var(--ochre-deep);border:1px solid var(--ochre);padding:3px 8px;border-radius:2px;vertical-align:middle;margin-left:6px}
+.row p{margin:8px 0 0;color:rgba(27,64,52,.78);max-width:56ch;font-size:.95em}
+@media(max-width:640px){.row{grid-template-columns:32px 1fr;gap:0 14px;padding:22px 12px}}
+
+/* ---------- about ---------- */
+.about{background:var(--cream);padding:clamp(56px,8vw,88px) 0}
+.about .grid{display:grid;grid-template-columns:1fr 1.4fr;gap:clamp(24px,5vw,72px);align-items:start}
+.about blockquote{
+  margin:0;font-size:clamp(24px,2.8vw,32px);line-height:1.3;font-style:italic;
+  border-left:3px solid var(--ochre);padding-left:22px;
+}
+.about .body p{margin:0 0 16px;color:rgba(27,64,52,.85)}
+@media(max-width:760px){.about .grid{grid-template-columns:1fr}}
+
+/* ---------- steps ---------- */
+.steps{padding:clamp(56px,8vw,88px) 0}
+.step-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(20px,3vw,40px);margin-top:32px}
+.step{border-top:2px solid var(--green);padding-top:16px}
+.step .n{font-family:var(--sans);font-size:12px;color:var(--ochre-deep);letter-spacing:.2em;display:block;margin-bottom:8px}
+.step h3{font-weight:400;font-size:22px;margin:0 0 8px}
+.step p{margin:0;font-size:.95em;color:rgba(27,64,52,.8)}
+@media(max-width:720px){.step-grid{grid-template-columns:1fr;gap:24px}}
+
+/* ---------- form ---------- */
+.inquire{background:var(--cream);padding:clamp(56px,8vw,96px) 0}
+form{display:grid;gap:20px;max-width:640px}
+.field{display:grid;gap:7px;border:0;margin:0;padding:0;min-width:0}
+label,legend{font-family:var(--sans);font-size:11.5px;letter-spacing:.16em;text-transform:lowercase;color:var(--sage)}
+legend{padding:0;margin-bottom:7px}
+input,textarea,select{
+  font-family:var(--serif);font-size:17px;color:var(--green);
+  background:var(--paper);border:1px solid var(--rule);border-radius:2px;padding:13px 14px;width:100%;
+  transition:border-color .15s ease,box-shadow .15s ease;
+}
+textarea{min-height:130px;resize:vertical;line-height:1.55}
+input:focus,textarea:focus,select:focus{outline:none;border-color:var(--green);box-shadow:0 0 0 3px rgba(192,128,64,.25)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media(max-width:600px){.two{grid-template-columns:1fr}}
+/* Service picks are plain checkboxes styled as chips — no script needed. */
+.picks{display:flex;flex-wrap:wrap;gap:8px}
+.picks label{
+  display:inline-flex;align-items:center;gap:8px;cursor:pointer;
+  font-size:12px;letter-spacing:.06em;color:var(--green);
+  border:1px solid var(--rule);background:var(--paper);padding:8px 12px;border-radius:2px;
+  transition:background .15s ease,color .15s ease,border-color .15s ease;
+}
+.picks input{width:auto;margin:0;accent-color:var(--ochre)}
+.picks label:has(input:checked){background:var(--green);border-color:var(--green);color:var(--cream)}
+.picks label:has(input:focus-visible){outline:2px solid var(--ochre);outline-offset:2px}
+.note{font-family:var(--sans);font-size:11.5px;color:rgba(27,64,52,.6);margin:0}
+.hp{position:absolute;left:-9999px}
+
+/* ---------- footer ---------- */
+footer{background:var(--green);color:rgba(242,234,223,.65);padding:36px 0;font-family:var(--sans);font-size:12px;letter-spacing:.04em}
+footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+footer a{color:var(--ochre)}
+footer .sig{display:inline-flex;align-items:center;gap:12px}
+footer .sig svg{width:18px;height:18px}
+
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<!-- Brand mark, reversed for dark backgrounds. Referenced below with <use>. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="mark" viewBox="-42 -42 84 84">
+    <circle r="42" fill="#F2EADF"/>
+    <path d="M0-30A36 36 0 0 1 0 30A36 36 0 0 1 0-30" fill="#1B4034" transform="rotate(-18)"/>
+    <circle r="6" fill="#C08040"/>
+  </symbol>
+</svg>
+
+<header class="masthead">
+  <div class="wrap">
+    <a class="mark" href="#top" aria-label="Salara Consulting, home">
+      <svg aria-hidden="true"><use href="#mark"/></svg>
+      <span class="word"><b>salara</b><small>consulting</small></span>
+    </a>
+    <nav class="nav">
+      <a href="#services">services</a>
+      <a href="#about">about</a>
+      <a href="#how">how it works</a>
+      <a class="nav-cta" href="#inquire">get in touch</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <svg class="seal" viewBox="-42 -42 84 84" aria-hidden="true"><circle r="42" fill="#F2EADF"/><path d="M0-30A36 36 0 0 1 0 30A36 36 0 0 1 0-30" fill="#1B4034" transform="rotate(-18)"/></svg>
+  <div class="wrap">
+    <p class="eyebrow reveal">social media strategy &amp; management</p>
+    <h1 class="reveal">A presence that works for you, not the <em>algorithm</em>.</h1>
+    <p class="reveal">Salara treats social media as your online business card: a calm, consistent place where people can find you, understand your work, and go deeper. Presence over volume, with no pressure to post constantly.</p>
+    <a class="btn reveal" href="#inquire">start a conversation</a>
+  </div>
+</section>
+
+<section class="services" id="services">
+  <div class="wrap">
+    <p class="eyebrow">what we do</p>
+    <h2>Strategy first, then the steady work of showing up.</h2>
+    <p class="lede">Most engagements combine the first four as one monthly plan. Website support is available as an add-on.</p>
+
+    <ol class="rows">
+      <li class="row">
+        <span class="idx">01</span>
+        <div>
+          <h3>Account audit &amp; strategy</h3>
+          <p>A full review of every account you run, followed by a strategy presentation: which platforms are worth your time, what each one is for, and how they fit together under one plan.</p>
+        </div>
+      </li>
+      <li class="row">
+        <span class="idx">02</span>
+        <div>
+          <h3>Content planning &amp; creation</h3>
+          <p>A content calendar and the posts to fill it: reels, feed posts, and stories. The visual direction comes from your own photography, with clean template-based design, so everything looks like it belongs together.</p>
+        </div>
+      </li>
+      <li class="row">
+        <span class="idx">03</span>
+        <div>
+          <h3>Story-first engagement</h3>
+          <p>Stay visible without a heavy feed. Short-lived stories, reposts, and shares of partner and community content keep you active between the posts that matter, without chasing the algorithm.</p>
+        </div>
+      </li>
+      <li class="row">
+        <span class="idx">04</span>
+        <div>
+          <h3>Campaigns &amp; reporting</h3>
+          <p>Focused content for programs, events, and launches as they happen. Each month you get a one-hour strategy call and a metrics report showing what is working.</p>
+        </div>
+      </li>
+      <li class="row">
+        <span class="idx">+</span>
+        <div>
+          <h3>Website support <span class="tag">add-on</span></h3>
+          <p>Website updates are coordinated through Salara and completed by a trusted development partner, so your site stays in step with the rest of your presence. Scoped and billed as a separate line item.</p>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="wrap">
+    <p class="eyebrow">about salara</p>
+    <div class="grid">
+      <blockquote>Social media should be a place people can find you, not a job that never ends.</blockquote>
+      <div class="body">
+        <p>Salara Consulting is run by Chanarah Romero. [Background and experience to confirm with Salara.]</p>
+        <p>The work is built for organizations with a clear mission and limited time. Salara keeps the posting cadence low and intentional, and treats visibility as a choice. Being easy to find doesn't require putting everything online.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="steps" id="how">
+  <div class="wrap">
+    <p class="eyebrow">how it works</p>
+    <h2>Three steps, no long sales process.</h2>
+    <div class="step-grid">
+      <div class="step">
+        <span class="n">01</span>
+        <h3>You reach out</h3>
+        <p>Tell us where you are online and what you want people to understand about your work. We start with a discovery conversation.</p>
+      </div>
+      <div class="step">
+        <span class="n">02</span>
+        <h3>Audit &amp; strategy</h3>
+        <p>Salara reviews your accounts and presents what it found, along with a strategy for each platform. You approve the content and posting cadence before anything goes live.</p>
+      </div>
+      <div class="step">
+        <span class="n">03</span>
+        <h3>Posting begins</h3>
+        <p>Month to month, with 30 days' notice to change or end it. Any hours beyond the plan are always flagged in advance.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="inquire" id="inquire">
+  <div class="wrap">
+    <p class="eyebrow">get in touch</p>
+    <h2>Tell us what you need.</h2>
+    <p class="lede">The more specific you are, the more useful the first reply will be. No obligation and no follow-up sequence.</p>
+
+    <!--
+      No JavaScript: the form posts straight to its action.
+      Until a form service is set up it opens an email to CONTACT_EMAIL.
+      To switch to Formspree, replace the three attributes on <form> with:
+        action="https://formspree.io/f/xxxxxxx" method="POST"
+    -->
+    <form action="mailto:[CONTACT_EMAIL]" method="post" enctype="text/plain">
+      <div class="two">
+        <div class="field">
+          <label for="name">your name</label>
+          <input id="name" name="name" type="text" autocomplete="name" required>
+        </div>
+        <div class="field">
+          <label for="org">organization</label>
+          <input id="org" name="organization" type="text" autocomplete="organization">
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="email">email</label>
+        <input id="email" name="email" type="email" autocomplete="email" required>
+      </div>
+
+      <fieldset class="field">
+        <legend>what you're interested in</legend>
+        <div class="picks">
+          <label><input type="checkbox" name="services" value="Account audit and strategy">Account audit &amp; strategy</label>
+          <label><input type="checkbox" name="services" value="Content planning and creation">Content planning &amp; creation</label>
+          <label><input type="checkbox" name="services" value="Story-first engagement">Story-first engagement</label>
+          <label><input type="checkbox" name="services" value="Campaigns and reporting">Campaigns &amp; reporting</label>
+          <label><input type="checkbox" name="services" value="Website support">Website support</label>
+          <label><input type="checkbox" name="services" value="Not sure yet">Not sure yet</label>
+        </div>
+      </fieldset>
+
+      <div class="field">
+        <label for="message">details</label>
+        <textarea id="message" name="message" placeholder="What's the situation? What's been getting in the way?" required></textarea>
+      </div>
+
+      <input class="hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+      <div>
+        <button class="btn" type="submit">send inquiry</button>
+      </div>
+      <p class="note">Your details go to Salara and nowhere else.</p>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span class="sig"><svg aria-hidden="true"><use href="#mark"/></svg>Salara Consulting</span>
+    <span><a href="mailto:[CONTACT_EMAIL]">[CONTACT_EMAIL]</a></span>
+  </div>
+</footer>
+
+</body>
+</html>
