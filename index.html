@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- GitHub Pages can't send headers, so the security policy lives here. If the form ever posts to an endpoint, add its origin to connect-src. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; form-action 'self' mailto:; base-uri 'none'; object-src 'none'; upgrade-insecure-requests">
 <title>Salara Consulting</title>
 <meta name="description" content="Salara Consulting plans and manages calm, intentional social media for mission-driven organizations: audits, strategy, content, and campaigns.">
 <link rel="icon" href="assets/brand/salara-favicon.svg" type="image/svg+xml">
@@ -24,10 +26,12 @@
   --cream-2:#E9DECF;
   --paper:#FAF6F0;
   --ochre:#C08040;
-  --ochre-deep:#9E6630;
+  --ochre-deep:#8A5626;
+  --ochre-light:#D69A5C;
   --sage:#4A6B5C;
   --sage-light:#A9BFB2;
   --rule:rgba(27,64,52,.18);
+  --field-rule:rgba(27,64,52,.58);
   /* Wordmark is a humanist serif (Pagella/Palatino); subline is a wide-tracked geometric sans. */
   --serif:"TeX Gyre Pagella","Palatino Linotype",Palatino,"Book Antiqua","URW Palladio L",P052,Georgia,serif;
   --sans:"Poppins","Helvetica Neue",Arial,sans-serif;
@@ -42,6 +46,8 @@ body{
 }
 a{color:var(--green);text-decoration-color:var(--ochre);text-underline-offset:3px}
 :focus-visible{outline:2px solid var(--ochre);outline-offset:2px}
+/* Keep focused controls clear of the sticky header. */
+:where(a,button,input,select,textarea,[tabindex]){scroll-margin-top:88px}
 .wrap{max-width:1080px;margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
 .eyebrow{
   font-family:var(--sans);font-size:12px;font-weight:500;letter-spacing:.24em;text-transform:lowercase;
@@ -49,6 +55,15 @@ a{color:var(--green);text-decoration-color:var(--ochre);text-underline-offset:3p
 }
 h2{font-weight:400;letter-spacing:-.01em;line-height:1.15;font-size:clamp(28px,3.6vw,42px);margin:0 0 12px}
 .lede{max-width:56ch;color:rgba(27,64,52,.8);margin:0 0 32px}
+
+/* ---------- skip link ---------- */
+.skip{
+  position:absolute;left:var(--pad);top:-64px;z-index:100;
+  font-family:var(--sans);font-size:12.5px;font-weight:500;letter-spacing:.14em;text-transform:lowercase;
+  background:var(--ochre);color:var(--green-deep);padding:12px 18px;border-radius:2px;text-decoration:none;
+}
+.skip:focus{top:12px}
+main:focus{outline:none}
 
 /* ---------- header ---------- */
 .masthead{background:var(--green);color:var(--cream);position:sticky;top:0;z-index:50}
@@ -93,18 +108,33 @@ h2{font-weight:400;letter-spacing:-.01em;line-height:1.15;font-size:clamp(28px,3
 
 /* ---------- services ---------- */
 .services{padding:clamp(56px,8vw,96px) 0 clamp(40px,6vw,72px)}
+.hint{font-family:var(--sans);font-size:12.5px;color:rgba(27,64,52,.74);margin:-16px 0 28px}
 .rows{border-top:1px solid var(--rule);margin:0;padding:0;list-style:none}
 .row{
-  display:grid;grid-template-columns:44px 1fr;gap:0 20px;align-items:baseline;
-  border-bottom:1px solid var(--rule);padding:26px 16px;
-  transition:background .18s ease,padding-left .18s ease;
+  display:grid;grid-template-columns:44px 1fr auto;gap:0 20px;align-items:baseline;
+  width:100%;text-align:left;background:none;border:0;border-bottom:1px solid var(--rule);
+  font:inherit;color:inherit;padding:26px 16px;cursor:pointer;
+  transition:background .18s ease,color .18s ease,padding-left .18s ease;
 }
-.row:hover{background:var(--cream);padding-left:24px}
+.row:hover,.row:focus-visible{background:var(--cream);padding-left:24px;outline:2px solid transparent}
+.row:focus-visible{box-shadow:inset 3px 0 0 var(--ochre)}
 .row .idx{font-family:var(--sans);font-size:12px;color:var(--ochre-deep);letter-spacing:.08em}
-.row h3{font-weight:400;font-size:clamp(22px,2.4vw,28px);letter-spacing:-.01em;line-height:1.2;margin:0}
+.row .name{display:block;font-weight:400;font-size:clamp(22px,2.4vw,28px);letter-spacing:-.01em;line-height:1.2;margin:0}
 .row .tag{font-family:var(--sans);font-size:10.5px;letter-spacing:.16em;color:var(--ochre-deep);border:1px solid var(--ochre);padding:3px 8px;border-radius:2px;vertical-align:middle;margin-left:6px}
-.row p{margin:8px 0 0;color:rgba(27,64,52,.78);max-width:56ch;font-size:.95em}
-@media(max-width:640px){.row{grid-template-columns:32px 1fr;gap:0 14px;padding:22px 12px}}
+.row .desc{display:block;margin:8px 0 0;color:rgba(27,64,52,.78);max-width:56ch;font-size:.95em}
+.row .pick{
+  font-family:var(--sans);font-size:11px;letter-spacing:.14em;color:var(--green);
+  border:1px solid var(--green);border-radius:2px;padding:6px 12px;white-space:nowrap;align-self:center;
+}
+.row[aria-pressed="true"]{background:var(--green);color:var(--cream);padding-left:24px}
+.row[aria-pressed="true"] .idx{color:var(--ochre-light)}
+.row[aria-pressed="true"] .desc{color:rgba(242,234,223,.82)}
+.row[aria-pressed="true"] .tag{color:var(--ochre-light)}
+.row[aria-pressed="true"] .pick{background:var(--ochre);border-color:var(--ochre);color:var(--green-deep)}
+@media(max-width:640px){
+  .row{grid-template-columns:32px 1fr;gap:0 14px;padding:22px 12px}
+  .row .pick{grid-column:2;justify-self:start;margin-top:12px}
+}
 
 /* ---------- about ---------- */
 .about{background:var(--cream);padding:clamp(56px,8vw,88px) 0}
@@ -133,14 +163,14 @@ label,legend{font-family:var(--sans);font-size:11.5px;letter-spacing:.16em;text-
 legend{padding:0;margin-bottom:7px}
 input,textarea,select{
   font-family:var(--serif);font-size:17px;color:var(--green);
-  background:var(--paper);border:1px solid var(--rule);border-radius:2px;padding:13px 14px;width:100%;
+  background:var(--paper);border:1px solid var(--field-rule);border-radius:2px;padding:13px 14px;width:100%;
   transition:border-color .15s ease,box-shadow .15s ease;
 }
 textarea{min-height:130px;resize:vertical;line-height:1.55}
-input:focus,textarea:focus,select:focus{outline:none;border-color:var(--green);box-shadow:0 0 0 3px rgba(192,128,64,.25)}
+input:focus,textarea:focus,select:focus{outline:2px solid transparent;border-color:var(--green);box-shadow:0 0 0 3px rgba(192,128,64,.25)}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:20px}
 @media(max-width:600px){.two{grid-template-columns:1fr}}
-/* Service picks are plain checkboxes styled as chips — no script needed. */
+/* Service picks are checkboxes styled as chips; the service rows above toggle them. */
 .picks{display:flex;flex-wrap:wrap;gap:8px}
 .picks label{
   display:inline-flex;align-items:center;gap:8px;cursor:pointer;
@@ -151,13 +181,18 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--green);b
 .picks input{width:auto;margin:0;accent-color:var(--ochre)}
 .picks label:has(input:checked){background:var(--green);border-color:var(--green);color:var(--cream)}
 .picks label:has(input:focus-visible){outline:2px solid var(--ochre);outline-offset:2px}
-.note{font-family:var(--sans);font-size:11.5px;color:rgba(27,64,52,.6);margin:0}
+/* Inline errors show only after the visitor has interacted with the field. */
+.err{display:none;font-family:var(--sans);font-size:12px;color:#A33A22;margin:0}
+input:user-invalid,textarea:user-invalid{border-color:#A33A22}
+.field:has(input:user-invalid) .err{display:block}
+.note{font-family:var(--sans);font-size:11.5px;color:rgba(27,64,52,.74);margin:0}
 .hp{position:absolute;left:-9999px}
+.req{color:var(--ochre-deep);margin-left:4px}
 
 /* ---------- footer ---------- */
 footer{background:var(--green);color:rgba(242,234,223,.65);padding:36px 0;font-family:var(--sans);font-size:12px;letter-spacing:.04em}
 footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
-footer a{color:var(--ochre)}
+footer a{color:var(--ochre-light)}
 footer .sig{display:inline-flex;align-items:center;gap:12px}
 footer .sig svg{width:18px;height:18px}
 
@@ -169,6 +204,8 @@ footer .sig svg{width:18px;height:18px}
 </style>
 </head>
 <body>
+
+<a class="skip" href="#main">skip to content</a>
 
 <!-- Brand mark, reversed for dark backgrounds. Referenced below with <use>. -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -194,6 +231,8 @@ footer .sig svg{width:18px;height:18px}
   </div>
 </header>
 
+<main id="main" tabindex="-1">
+
 <section class="hero" id="top">
   <svg class="seal" viewBox="-42 -42 84 84" aria-hidden="true"><circle r="42" fill="#F2EADF"/><path d="M0-30A36 36 0 0 1 0 30A36 36 0 0 1 0-30" fill="#1B4034" transform="rotate(-18)"/></svg>
   <div class="wrap">
@@ -209,43 +248,49 @@ footer .sig svg{width:18px;height:18px}
     <p class="eyebrow">what we do</p>
     <h2>Strategy first, then the steady work of showing up.</h2>
     <p class="lede">Most engagements combine the first four as one monthly plan. Website support is available as an add-on.</p>
+    <p class="hint">Select a service to add it to the inquiry form below.</p>
 
     <ol class="rows">
-      <li class="row">
+      <li><button type="button" class="row" aria-pressed="false" data-for="svc-audit" aria-labelledby="svc-audit-name" aria-describedby="svc-audit-desc">
         <span class="idx">01</span>
-        <div>
-          <h3>Account audit &amp; strategy</h3>
-          <p>A full review of every account you run, followed by a strategy presentation: which platforms are worth your time, what each one is for, and how they fit together under one plan.</p>
-        </div>
-      </li>
-      <li class="row">
+        <span>
+          <span class="name" id="svc-audit-name">Account audit &amp; strategy</span>
+          <span class="desc" id="svc-audit-desc">A full review of every account you run, followed by a strategy presentation: which platforms are worth your time, what each one is for, and how they fit together under one plan.</span>
+        </span>
+        <span class="pick">select</span>
+      </button></li>
+      <li><button type="button" class="row" aria-pressed="false" data-for="svc-content" aria-labelledby="svc-content-name" aria-describedby="svc-content-desc">
         <span class="idx">02</span>
-        <div>
-          <h3>Content planning &amp; creation</h3>
-          <p>A content calendar and the posts to fill it: reels, feed posts, and stories. The visual direction comes from your own photography, with clean template-based design, so everything looks like it belongs together.</p>
-        </div>
-      </li>
-      <li class="row">
+        <span>
+          <span class="name" id="svc-content-name">Content planning &amp; creation</span>
+          <span class="desc" id="svc-content-desc">A content calendar and the posts to fill it: reels, feed posts, and stories. The visual direction comes from your own photography, with clean template-based design, so everything looks like it belongs together.</span>
+        </span>
+        <span class="pick">select</span>
+      </button></li>
+      <li><button type="button" class="row" aria-pressed="false" data-for="svc-story" aria-labelledby="svc-story-name" aria-describedby="svc-story-desc">
         <span class="idx">03</span>
-        <div>
-          <h3>Story-first engagement</h3>
-          <p>Stay visible without a heavy feed. Short-lived stories, reposts, and shares of partner and community content keep you active between the posts that matter, without chasing the algorithm.</p>
-        </div>
-      </li>
-      <li class="row">
+        <span>
+          <span class="name" id="svc-story-name">Story-first engagement</span>
+          <span class="desc" id="svc-story-desc">Stay visible without a heavy feed. Short-lived stories, reposts, and shares of partner and community content keep you active between the posts that matter, without chasing the algorithm.</span>
+        </span>
+        <span class="pick">select</span>
+      </button></li>
+      <li><button type="button" class="row" aria-pressed="false" data-for="svc-campaigns" aria-labelledby="svc-campaigns-name" aria-describedby="svc-campaigns-desc">
         <span class="idx">04</span>
-        <div>
-          <h3>Campaigns &amp; reporting</h3>
-          <p>Focused content for programs, events, and launches as they happen. Each month you get a one-hour strategy call and a metrics report showing what is working.</p>
-        </div>
-      </li>
-      <li class="row">
+        <span>
+          <span class="name" id="svc-campaigns-name">Campaigns &amp; reporting</span>
+          <span class="desc" id="svc-campaigns-desc">Focused content for programs, events, and launches as they happen. Each month you get a one-hour strategy call and a metrics report showing what is working.</span>
+        </span>
+        <span class="pick">select</span>
+      </button></li>
+      <li><button type="button" class="row" aria-pressed="false" data-for="svc-website" aria-labelledby="svc-website-name" aria-describedby="svc-website-desc">
         <span class="idx">+</span>
-        <div>
-          <h3>Website support <span class="tag">add-on</span></h3>
-          <p>Website updates are coordinated through Salara and completed by a trusted development partner, so your site stays in step with the rest of your presence. Scoped and billed as a separate line item.</p>
-        </div>
-      </li>
+        <span>
+          <span class="name" id="svc-website-name">Website support <span class="tag">add-on</span></span>
+          <span class="desc" id="svc-website-desc">Website updates are coordinated through Salara and completed by a trusted development partner, so your site stays in step with the rest of your presence. Scoped and billed as a separate line item.</span>
+        </span>
+        <span class="pick">select</span>
+      </button></li>
     </ol>
   </div>
 </section>
@@ -292,55 +337,57 @@ footer .sig svg{width:18px;height:18px}
     <h2>Tell us what you need.</h2>
     <p class="lede">The more specific you are, the more useful the first reply will be. No obligation and no follow-up sequence.</p>
 
-    <!--
-      No JavaScript: the form posts straight to its action.
-      Until a form service is set up it opens an email to chanarah@chanarah.com.
-      To switch to Formspree, replace the three attributes on <form> with:
-        action="https://formspree.io/f/xxxxxxx" method="POST"
-    -->
-    <form action="mailto:chanarah@chanarah.com" method="post" enctype="text/plain">
+    <!-- Without JS the form opens a plain mailto draft; the script below validates, then turns the answers into a written email. -->
+    <form id="inquiry" action="mailto:chanarah@chanarah.com" method="post" enctype="text/plain">
+      <p class="note">Fields marked <span class="req" aria-hidden="true">*</span> are required.</p>
+
       <div class="two">
         <div class="field">
-          <label for="name">your name</label>
-          <input id="name" name="name" type="text" autocomplete="name" required>
+          <label for="name">your name<span class="req" aria-hidden="true">*</span></label>
+          <input id="name" name="name" type="text" autocomplete="name" maxlength="120" required>
         </div>
         <div class="field">
           <label for="org">organization</label>
-          <input id="org" name="organization" type="text" autocomplete="organization">
+          <input id="org" name="organization" type="text" autocomplete="organization" maxlength="200">
         </div>
       </div>
 
       <div class="field">
-        <label for="email">email</label>
-        <input id="email" name="email" type="email" autocomplete="email" required>
+        <label for="email">email<span class="req" aria-hidden="true">*</span></label>
+        <input id="email" name="email" type="email" autocomplete="email" maxlength="254" required
+               pattern="[^@\s]+@[^@\s]+\.[^@\s]{2,}" title="An email address like name@example.org" aria-describedby="email-err">
+        <p class="err" id="email-err">Enter an email address like name@example.org so Salara can reply.</p>
       </div>
 
       <fieldset class="field">
         <legend>what you're interested in</legend>
         <div class="picks">
-          <label><input type="checkbox" name="services" value="Account audit and strategy">Account audit &amp; strategy</label>
-          <label><input type="checkbox" name="services" value="Content planning and creation">Content planning &amp; creation</label>
-          <label><input type="checkbox" name="services" value="Story-first engagement">Story-first engagement</label>
-          <label><input type="checkbox" name="services" value="Campaigns and reporting">Campaigns &amp; reporting</label>
-          <label><input type="checkbox" name="services" value="Website support">Website support</label>
-          <label><input type="checkbox" name="services" value="Not sure yet">Not sure yet</label>
+          <label><input type="checkbox" id="svc-audit" name="services" value="an account audit and strategy">Account audit &amp; strategy</label>
+          <label><input type="checkbox" id="svc-content" name="services" value="content planning and creation">Content planning &amp; creation</label>
+          <label><input type="checkbox" id="svc-story" name="services" value="story-first engagement">Story-first engagement</label>
+          <label><input type="checkbox" id="svc-campaigns" name="services" value="campaigns and reporting">Campaigns &amp; reporting</label>
+          <label><input type="checkbox" id="svc-website" name="services" value="website support">Website support</label>
+          <label><input type="checkbox" id="svc-unsure" name="services" value="not sure yet">Not sure yet</label>
         </div>
       </fieldset>
 
       <div class="field">
-        <label for="message">details</label>
-        <textarea id="message" name="message" placeholder="What's the situation? What's been getting in the way?" required></textarea>
+        <label for="message">details<span class="req" aria-hidden="true">*</span></label>
+        <textarea id="message" name="message" placeholder="What's the situation? What's been getting in the way?" maxlength="5000" required></textarea>
       </div>
 
-      <input class="hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <!-- Honeypot: hidden from people, filled by bots. Disabled so the no-JS mailto draft leaves it out; the script enables it. -->
+      <input class="hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" disabled>
 
       <div>
         <button class="btn" type="submit">send inquiry</button>
       </div>
-      <p class="note">Your details go to Salara and nowhere else.</p>
+      <p class="note">This opens a drafted email in your mail app, ready to review and send. Your details go to Salara and nowhere else.</p>
     </form>
   </div>
 </section>
+
+</main>
 
 <footer>
   <div class="wrap">
@@ -349,5 +396,61 @@ footer .sig svg{width:18px;height:18px}
   </div>
 </footer>
 
+<script>
+const TO = "chanarah@chanarah.com";
+const form = document.getElementById("inquiry");
+const trap = form.elements._gotcha;
+trap.disabled = false;
+
+// Whitespace-only answers should fail "required" the same way empty ones do.
+// Trimming on change runs before the browser's own checks on submit.
+const textFields = form.querySelectorAll("input[type=text], input[type=email], textarea");
+const trimAll = () => textFields.forEach(el => { el.value = el.value.trim(); });
+textFields.forEach(el => el.addEventListener("change", trimAll));
+
+// Service rows toggle the matching checkbox in the form, and stay in sync with it.
+document.querySelectorAll(".row").forEach(row => {
+  const box = document.getElementById(row.dataset.for);
+  const sync = () => {
+    row.setAttribute("aria-pressed", box.checked);
+    row.querySelector(".pick").textContent = box.checked ? "added" : "select";
+  };
+  row.addEventListener("click", () => { box.checked = !box.checked; sync(); });
+  box.addEventListener("change", sync);
+});
+
+// Build a natural-language email from the answers. Runs only after the browser's own required-field checks pass.
+form.addEventListener("submit", e => {
+  e.preventDefault();
+  // A filled honeypot means a bot; drop it without telling it why.
+  if (trap.value) return;
+  const f = new FormData(form);
+  const name = f.get("name").trim();
+  const org = f.get("organization").trim();
+  const picked = f.getAll("services");
+  const unsure = picked.includes("not sure yet");
+  const services = picked.filter(s => s !== "not sure yet");
+
+  const intro = org
+    ? `My name is ${name}, and I'm reaching out on behalf of ${org}.`
+    : `My name is ${name}, and I'm reaching out about social media support.`;
+  let interest = "";
+  if (services.length === 1) interest = `I'm interested in ${services[0]}.`;
+  else if (services.length > 1) interest = "I'm interested in:\n" + services.map(s => "- " + s).join("\n");
+  if (unsure) interest += (interest ? "\n\nI'm also open to your recommendations on what would help most." : "I'm not sure yet exactly what I need, and I'd like to talk through how Salara could help.");
+
+  const body = [
+    "Hi Chanarah,",
+    intro,
+    interest,
+    f.get("message").trim(),
+    `You can reach me at ${f.get("email").trim()}.`,
+    `Thanks,\n${name}`
+  ].filter(Boolean).join("\n\n");
+  const subject = `Inquiry from ${name}${org ? " at " + org : ""}`;
+
+  location.href = `mailto:${TO}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+});
+</script>
 </body>
 </html>
